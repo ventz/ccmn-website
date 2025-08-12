@@ -17,9 +17,10 @@ document.addEventListener('DOMContentLoaded', async function() {
         maxZoom: 19
     }).addTo(map);
 
-    // Load repeaters data from JSON file
+    // Load repeaters data from JSON file with cache busting
     try {
-        const response = await fetch('repeaters.json');
+        const timestamp = new Date().getTime(); // Add timestamp for cache busting
+        const response = await fetch(`repeaters.json?v=${timestamp}`);
         repeatersData = await response.json();
         console.log('Loaded repeater data from JSON file');
     } catch (error) {
@@ -170,9 +171,10 @@ function addMarkersToMap(repeaters) {
     repeaters.forEach((repeater, index) => {
         const color = repeater.status.toLowerCase() === 'active' ? '#6c757d' : '#FFC107';
         
-        // Create custom icon using icon.png
+        // Create custom icon using icon.png with cache busting
+        const timestamp = new Date().getTime();
         const icon = L.icon({
-            iconUrl: 'icon.png',
+            iconUrl: `icon.png?v=${timestamp}`,
             iconSize: [32, 32],
             iconAnchor: [16, 16],
             popupAnchor: [0, -16],
@@ -295,14 +297,15 @@ function addMapLegend() {
     const legendContainer = document.getElementById('map-legend');
     
     if (legendContainer) {
+        const timestamp = new Date().getTime();
         legendContainer.innerHTML = `
             <h4>Legend</h4>
             <div class="legend-item">
-                <img src="icon.png" class="legend-icon" style="filter: grayscale(0.8) brightness(0.9);">
+                <img src="icon.png?v=${timestamp}" class="legend-icon" style="filter: grayscale(0.8) brightness(0.9);">
                 <span class="legend-text">Active Repeater</span>
             </div>
             <div class="legend-item">
-                <img src="icon.png" class="legend-icon" style="filter: hue-rotate(35deg) saturate(1.5) brightness(1.1);">
+                <img src="icon.png?v=${timestamp}" class="legend-icon" style="filter: hue-rotate(35deg) saturate(1.5) brightness(1.1);">
                 <span class="legend-text">Planned Repeater</span>
             </div>
             <div style="margin-top: 15px; font-size: 12px; color: #666;">
@@ -312,7 +315,7 @@ function addMapLegend() {
     }
 }
 
-// Function to preload icon image
+// Function to preload icon image with cache busting
 function preloadIcon(iconUrl) {
     return new Promise((resolve, reject) => {
         const img = new Image();
@@ -324,7 +327,8 @@ function preloadIcon(iconUrl) {
             console.warn('Failed to preload icon image, proceeding anyway');
             resolve(); // Resolve anyway to not block the app
         };
-        img.src = iconUrl;
+        const timestamp = new Date().getTime();
+        img.src = `${iconUrl}?v=${timestamp}`;
     });
 }
 
