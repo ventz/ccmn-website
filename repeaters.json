@@ -73,5 +73,20 @@
     "operator": "CCMN",
     "pubkey": "a5b1ed3465559590f883da6d44476b6a7fc1412e5e1243fc81df27669f62869a",
     "status": "Active"
+  },
+  {
+    "repeaterName": "Brookline Village - 001",
+    "hardwareName": "RAK 4631",
+    "antenna": "Omni Directional 2.5dBi",
+    "locationFriendlyName": "Brookline Village",
+    "locationLatLong": [42.331797, -71.117744],
+    "elevationFeet": 40,
+    "presetName": "USA",
+    "frequency": "910.525 MHz",
+    "bandwidth": "250 kHz",
+    "spreadingFactor": 11,
+    "operator": "CCMN",
+    "pubkey": "fd46ebac9a9bf174f9a3feea69ae44eeead502e0f89f14ccb462f52f45c2eda9",
+    "status": "Active"
   }
 ]

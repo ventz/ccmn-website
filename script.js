@@ -1,7 +1,6 @@
 // Global variables to store map, markers, and repeaters data
 let map;
 let markers = {};
-let circles = {};
 let repeatersData = [];
 
 // Initialize the map when the DOM is loaded
@@ -132,14 +131,6 @@ function addMarkersToMap(repeaters) {
             border-radius: 50%;
             box-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
-        .active-circle {
-            stroke: #6c757d;
-            fill: #6c757d;
-        }
-        .planned-circle {
-            stroke: #FFC107;
-            fill: #FFC107;
-        }
         .active-icon {
             filter: grayscale(0.8) brightness(0.9);
         }
@@ -214,23 +205,6 @@ function addMarkersToMap(repeaters) {
         // Bind popup to marker
         marker.bindPopup(popupContent);
 
-        // Add coverage circle for active repeaters
-        if (repeater.status.toLowerCase() === 'active') {
-            // Use a fixed radius of 3 miles for all repeaters
-            const radiusInMeters = 3 * 1609.34; // 3 miles in meters
-
-            const circle = L.circle(repeater.locationLatLong, {
-                color: color,
-                fillColor: color,
-                fillOpacity: 0.07, // More transparent
-                radius: radiusInMeters,
-                weight: 1,
-                className: repeater.status.toLowerCase() === 'active' ? 'active-circle' : 'planned-circle'
-            }).addTo(map);
-            
-            circles[index] = circle;
-        }
-
         // Add click event to marker - only show popup without selecting card
         marker.on('click', () => {
             marker.openPopup();
@@ -291,22 +265,6 @@ function selectRepeaterOnMap(index) {
                 duration: 1
             });
             marker.openPopup();
-        }
-        
-        // Highlight coverage circle if exists
-        if (circles[index]) {
-            circles[index].setStyle({
-                fillOpacity: 0.2,
-                weight: 2
-            });
-            
-            // Reset highlight after 3 seconds
-            setTimeout(() => {
-                circles[index].setStyle({
-                    fillOpacity: 0.07,
-                    weight: 1
-                });
-            }, 3000);
         }
     }
 }
