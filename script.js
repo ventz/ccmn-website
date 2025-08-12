@@ -2,6 +2,7 @@
 let map;
 let markers = {};
 let repeatersData = [];
+let otherRepeatersData = [];
 
 // Initialize the map when the DOM is loaded
 document.addEventListener('DOMContentLoaded', async function() {
@@ -17,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         maxZoom: 19
     }).addTo(map);
 
-    // Load repeaters data from JSON file with cache busting
+    // Load repeaters data from JSON files with cache busting
     try {
         const timestamp = new Date().getTime(); // Add timestamp for cache busting
         const response = await fetch(`repeaters.json?v=${timestamp}`);
@@ -28,11 +29,23 @@ document.addEventListener('DOMContentLoaded', async function() {
         repeatersData = []; // Initialize empty array if JSON load fails
     }
     
+    // Load other repeaters data
+    try {
+        const timestamp = new Date().getTime(); // Add timestamp for cache busting
+        const response = await fetch(`other-repeaters.json?v=${timestamp}`);
+        otherRepeatersData = await response.json();
+        console.log('Loaded other repeaters data from JSON file');
+    } catch (error) {
+        console.error('Failed to load other-repeaters.json:', error);
+        otherRepeatersData = []; // Initialize empty array if JSON load fails
+    }
+    
     // Create repeater cards
     createRepeaterCards(repeatersData);
     
-    // Add markers to map
+    // Add markers to map for regular repeaters and other repeaters
     addMarkersToMap(repeatersData);
+    addOtherMarkersToMap(otherRepeatersData);
     
     // Add legend to map
     addMapLegend();
@@ -136,6 +149,9 @@ function addMarkersToMap(repeaters) {
             filter: grayscale(0.8) brightness(0.9);
         }
         .planned-icon {
+            filter: sepia(1) saturate(2) brightness(0.7); /* Makes icon brown */
+        }
+        .other-icon {
             filter: hue-rotate(35deg) saturate(1.5) brightness(1.1);
         }
         .repeater-popup h4 {
@@ -292,6 +308,53 @@ function selectRepeaterCard(index) {
     }
 }
 
+// Function to add other repeaters to map
+function addOtherMarkersToMap(otherRepeaters) {
+    // Add markers for each other repeater
+    otherRepeaters.forEach((repeater, index) => {
+        // Create custom icon using icon.png with cache busting
+        const timestamp = new Date().getTime();
+        const icon = L.icon({
+            iconUrl: `icon.png?v=${timestamp}`,
+            iconSize: [32, 32],
+            iconAnchor: [16, 16],
+            popupAnchor: [0, -16],
+            className: 'other-icon'
+        });
+
+        // Create marker with locationLatLong
+        const marker = L.marker(repeater.locationLatLong, { icon: icon }).addTo(map);
+        
+        // Format latitude and longitude
+        const formattedLatLng = `${repeater.locationLatLong[0].toFixed(4)}°, ${repeater.locationLatLong[1].toFixed(4)}°`;
+        
+        // Create popup content for other repeaters (similar to regular repeaters but with N/A handling)
+        const popupContent = `
+            <div class="repeater-popup">
+                <h4>${repeater.repeaterName}<br>(${repeater.hardwareName})</h4>
+                <p><strong>Antenna:</strong> ${repeater.antenna}</p>
+                <p><strong>Location:</strong> ${repeater.locationFriendlyName}</p>
+                <p><strong>Coordinates:</strong> ${formattedLatLng}</p>
+                <p><strong>Elevation:</strong> ${repeater.elevationFeet} ft</p>
+                <p><strong>Frequency:</strong> ${repeater.frequency}</p>
+                <p><strong>Bandwidth:</strong> ${repeater.bandwidth}</p>
+                <p><strong>Spreading Factor:</strong> ${repeater.spreadingFactor}</p>
+                <p><strong>Status:</strong> ${repeater.status}</p>
+                <p><strong>Operator:</strong> ${repeater.operator}</p>
+                <p><strong>Pubkey:</strong> ${repeater.pubkey.substring(0, 12)}...</p>
+            </div>
+        `;
+
+        // Bind popup to marker
+        marker.bindPopup(popupContent);
+
+        // Add click event to marker - only show popup without selecting card
+        marker.on('click', () => {
+            marker.openPopup();
+        });
+    });
+}
+
 // Function to add map legend
 function addMapLegend() {
     const legendContainer = document.getElementById('map-legend');
@@ -302,11 +365,15 @@ function addMapLegend() {
             <h4>Legend</h4>
             <div class="legend-item">
                 <img src="icon.png?v=${timestamp}" class="legend-icon" style="filter: grayscale(0.8) brightness(0.9);">
-                <span class="legend-text">Active Repeater</span>
+                <span class="legend-text">CCMN Repeaters</span>
+            </div>
+            <div class="legend-item">
+                <img src="icon.png?v=${timestamp}" class="legend-icon" style="filter: sepia(1) saturate(2) brightness(0.7);">
+                <span class="legend-text">Planned Repeaters</span>
             </div>
             <div class="legend-item">
                 <img src="icon.png?v=${timestamp}" class="legend-icon" style="filter: hue-rotate(35deg) saturate(1.5) brightness(1.1);">
-                <span class="legend-text">Planned Repeater</span>
+                <span class="legend-text">Other Repeaters</span>
             </div>
             <div style="margin-top: 15px; font-size: 12px; color: #666;">
                 Click on a repeater card or marker to view details
