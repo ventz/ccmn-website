@@ -88,5 +88,20 @@
     "operator": "CCMN",
     "pubkey": "fd46ebac9a9bf174f9a3feea69ae44eeead502e0f89f14ccb462f52f45c2eda9",
     "status": "Active"
+  },
+  {
+    "repeaterName": "Lawrence Hill",
+    "hardwareName": "Station G2",
+    "antenna": "Omni Directional 5dBi",
+    "locationFriendlyName": "Prospect Hill",
+    "locationLatLong": [42.70096, -71.18209],
+    "elevationFeet": 10,
+    "presetName": "USA",
+    "frequency": "910.525 MHz",
+    "bandwidth": "250 kHz",
+    "spreadingFactor": 11,
+    "operator": "Zaos",
+    "pubkey": "6b0507555d25833e9ae822a0dca13dbad13f9d8fc2d711ddc1ab99dc1114c18e",
+    "status": "Active"
   }
 ]
