@@ -62,37 +62,5 @@
     "operator": "N/A",
     "pubkey": "73ae89c490608241f285333c424a127b7f2bea37138df7e0585e685c67a544db",
     "status": "Online"
-  },
-  {
-    "repeaterName": "Ceylon Musk",
-    "hardwareName": "RAK Wisblock",
-    "antenna": "N/A",
-    "locationFriendlyName": "State House - 130 Bowdoin St",
-    "locationLatLong": [42.35866, -71.06263],
-    "elevationFeet": 560,
-    "presetName": "USA/Canada (Recommended)",
-    "frequency": "910.525 MHz",
-    "bandwidth": "62.5 kHz",
-    "spreadingFactor": 7,
-    "codingRate": 5,
-    "operator": "OOLONGfellowBridge",
-    "pubkey": "2823253a9545850eb619687df91a9d8ed22a38a34c5ba667b6accf6873d23101",
-    "status": "Online"
-  },
-  {
-    "repeaterName": "OrangePeacoat",
-    "hardwareName": "Heltec V3",
-    "antenna": "N/A",
-    "locationFriendlyName": "State House - 15 Temple St",
-    "locationLatLong": [42.36076, -71.06388],
-    "elevationFeet": 131,
-    "presetName": "USA/Canada (Recommended)",
-    "frequency": "910.525 MHz",
-    "bandwidth": "62.5 kHz",
-    "spreadingFactor": 7,
-    "codingRate": 5,
-    "operator": "OOLONGfellowBridge",
-    "pubkey": "97997f04bca1812622e73b981646dc02f7aed1e23921af9d2bffdd0cade337ad",
-    "status": "Online"
   }
 ]
