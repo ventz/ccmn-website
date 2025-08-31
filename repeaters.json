@@ -48,10 +48,10 @@
     "status": "Active"
   },
   {
-    "repeaterName": "Arlington HHill - 001",
+    "repeaterName": "ARL - IceSkating - 001",
     "hardwareName": "Station G2",
     "antenna": "Omni Directional 5dBi",
-    "locationFriendlyName": "Morningside/Hills Hill ",
+    "locationFriendlyName": "Morningside/Hills Hill/Ice Skating Rink ",
     "locationLatLong": [42.424705, -71.1706],
     "elevationFeet": 186,
     "presetName": "USA/Canada (Recommended)",
@@ -64,7 +64,7 @@
     "status": "Active"
   },
   {
-    "repeaterName": "ArlingtonParkCircle - 001",
+    "repeaterName": "ARL - ParkCircle - 001",
     "hardwareName": "Station G2",
     "antenna": "Omni Directional 5dBi",
     "locationFriendlyName": "Park Circle Water Tower",
@@ -80,7 +80,7 @@
     "status": "Active"
   },
   {
-    "repeaterName": "ArlingtonHeights - 001",
+    "repeaterName": "ARL - Heights - 001",
     "hardwareName": "Station G2",
     "antenna": "Omni Directional 2.5dBi",
     "locationFriendlyName": "Arlington Heights",
@@ -96,7 +96,7 @@
     "status": "Active"
   },
   {
-    "repeaterName": "ArlingtonHighSchool - 001",
+    "repeaterName": "ARL - HighSchool - 001",
     "hardwareName": "Station G2",
     "antenna": "Omni Directional 2.5dBi",
     "locationFriendlyName": "Arlington HighSchool",
