@@ -112,6 +112,22 @@
     "status": "Active"
   },
   {
+    "repeaterName": "LEX - GreatMeadow - 001",
+    "hardwareName": "Station G2",
+    "antenna": "Omni Directional 5dBi",
+    "locationFriendlyName": "Lexington Great Meadow Arlington Side",
+    "locationLatLong": [42.430301, -71.196018],
+    "elevationFeet": 209,
+    "presetName": "USA/Canada (Recommended)",
+    "frequency": "910.525 MHz",
+    "bandwidth": "62.5 kHz",
+    "spreadingFactor": 7,
+    "codingRate": 5,
+    "operator": "CCMN",
+    "pubkey": "a09b6f3be9a44e5c2fc7b09aa8af70a0940bf1f7938db66a557a1432437b3070",
+    "status": "Active"
+  },
+  {
     "repeaterName": "Brookline Village - 001",
     "hardwareName": "RAK 4631",
     "antenna": "Omni Directional 2.5dBi",
